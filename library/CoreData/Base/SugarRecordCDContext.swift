@@ -94,8 +94,13 @@ public class SugarRecordCDContext: SugarRecordContext
     {
         let fetchRequest: NSFetchRequest = SugarRecordCDContext.fetchRequest(fromFinder: finder)
         var error: NSError?
-        var objects: [NSManagedObject]? = self.contextCD.executeFetchRequest(fetchRequest) as? [NSManagedObject]
-        SugarRecordLogger.logLevelInfo.log("Found \((objects == nil) ? 0 : objects!.count) objects in database")
+        var objects: [NSManagedObject]? = nil
+        do {
+            try objects = self.contextCD.executeFetchRequest(fetchRequest) as? [NSManagedObject]
+            SugarRecordLogger.logLevelInfo.log("Found \((objects == nil) ? 0 : objects!.count) objects in database")
+        } catch {
+            objects = [NSManagedObject]()
+        }
         if objects == nil  {
             objects = [NSManagedObject]()
         }

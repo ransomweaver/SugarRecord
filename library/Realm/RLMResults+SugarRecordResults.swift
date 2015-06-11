@@ -24,13 +24,13 @@ import Realm
         return self.objectAtIndex(UInt(firstIndex) + index)
     }
     
-    func firstObject(#finder: SugarRecordFinder) -> AnyObject!
+    func firstObject(finder finder: SugarRecordFinder) -> AnyObject!
     {
         let (firstIndex, lastIndex) = indexes(finder: finder)
         return self.objectAtIndex(UInt(firstIndex))
     }
     
-    func lastObject(#finder: SugarRecordFinder) -> AnyObject!
+    func lastObject(finder finder: SugarRecordFinder) -> AnyObject!
     {
         let (firstIndex, lastIndex) = indexes(finder: finder)
         return self.objectAtIndex(UInt(lastIndex))
@@ -43,7 +43,7 @@ import Realm
     
     - returns: Tuple with the first and last index
     */
-    private func indexes(#finder: SugarRecordFinder) -> (Int, Int)
+    private func indexes(finder finder: SugarRecordFinder) -> (Int, Int)
     {
         var firstIndex: Int = 0
         var lastIndex: Int = Int(self.count) - 1

@@ -379,7 +379,7 @@ public class DefaultCDStack: SugarRecordStackProtocol
         let isMigratingError = error?.code == NSPersistentStoreIncompatibleVersionHashError || error?.code == NSMigrationMissingSourceModelError
         if (error?.domain == NSCocoaErrorDomain as String) && isMigratingError {
             var deleteError: NSError?
-            let rawURL: String = self.databasePath!.absoluteString!
+            let rawURL: String = self.databasePath!.absoluteString
             let shmSidecar: NSURL = NSURL(string: rawURL.stringByAppendingString("-shm"))!
             let walSidecar: NSURL = NSURL(string: rawURL.stringByAppendingString("-wal"))!
             do {
@@ -488,7 +488,7 @@ public class DefaultCDStack: SugarRecordStackProtocol
     
     - returns: NSURL with the path
     */
-    internal class func databasePathURLFromName(name: String) -> NSURL
+    internal class func databasePathURLFromName(name: String) -> NSURL!
     {
         let documentsPath: String = NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, .UserDomainMask, true)[0] as! String
         let mainBundleInfo: [NSObject: AnyObject] = NSBundle.mainBundle().infoDictionary!

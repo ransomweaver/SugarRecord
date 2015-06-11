@@ -115,7 +115,7 @@ public class DefaultREALMStack: SugarRecordStackProtocol
     */
     public func removeDatabase()
     {
-        let documentsPath: String = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
+        let documentsPath: String = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
         let databaseName: String = documentsPath.stringByAppendingPathComponent("default.realm")
         var error: NSError?
         do {
@@ -137,7 +137,7 @@ public class DefaultREALMStack: SugarRecordStackProtocol
     */
     func migrateIfNeeded()
     {
-        if self.migrations.isEmpty { return }
+     /*   if self.migrations.isEmpty { return }
         var lastSchema: Int = DefaultREALMStack.sorteredAndFiltered(migrations: self.migrations, fromOldSchema: 0).last!.toSchema
         RLMRealm.setSchemaVersion(UInt(lastSchema), withMigrationBlock: { (realmMigration: RLMMigration!, oldSchema: UInt) -> Void in
             let filteredMigrations: [RLMObjectMigration<RLMObject>] = DefaultREALMStack.sorteredAndFiltered(migrations: self.migrations, fromOldSchema:Int(oldSchema))
@@ -145,7 +145,7 @@ public class DefaultREALMStack: SugarRecordStackProtocol
                 migration.migrate(realmMigration)
                 return migration
             })
-        })
+        }) */
     }
     
     /**
