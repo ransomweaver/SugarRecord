@@ -16,7 +16,7 @@ extension RLMObject
     /**
     Returns the context where this object is alive
     
-    :returns: SugarRecord context
+    - returns: SugarRecord context
     */
     public func context() -> SugarRecordContext
     {
@@ -31,7 +31,7 @@ extension RLMObject
     /**
     Returns the class entity name
     
-    :returns: String with the entity name
+    - returns: String with the entity name
     */
     public class func modelName() -> String
     {
@@ -41,7 +41,7 @@ extension RLMObject
     /**
     Returns the stack type compatible with this object
     
-    :returns: SugarRecordEngine with the type
+    - returns: SugarRecordEngine with the type
     */
     public class func stackType() -> SugarRecordEngine
     {
@@ -53,9 +53,9 @@ extension RLMObject
     /**
     Returns a SugarRecord  finder with the predicate set
     
-    :param: predicate NSPredicate to be set to the finder
+    - parameter predicate: NSPredicate to be set to the finder
     
-    :returns: SugarRecord finder with the predicate set
+    - returns: SugarRecord finder with the predicate set
     */
     public class func by(predicate: NSPredicate) -> SugarRecordFinder
     {
@@ -68,9 +68,9 @@ extension RLMObject
     /**
     Returns a SugarRecord finder with the predicate set
     
-    :param: predicateString Predicate in String format
+    - parameter predicateString: Predicate in String format
     
-    :returns: SugarRecord finder with the predicate set
+    - returns: SugarRecord finder with the predicate set
     */
     public class func by(predicateString: NSString) -> SugarRecordFinder
     {
@@ -84,10 +84,10 @@ extension RLMObject
     /**
     Returns a SugarRecord finder with the predicate set
     
-    :param: key   Key of the predicate to be filtered
-    :param: value Value of the predicate to be filtered
+    - parameter key:   Key of the predicate to be filtered
+    - parameter value: Value of the predicate to be filtered
     
-    :returns: SugarRecord finder with the predicate set
+    - returns: SugarRecord finder with the predicate set
     */
     public class func by<T: StringLiteralConvertible, R: StringLiteralConvertible>(key: T, equalTo value: R) -> SugarRecordFinder
     {
@@ -103,10 +103,10 @@ extension RLMObject
     /**
     Returns a SugarRecord finder with the sort descriptor set
     
-    :param: sortingKey Sorting key
-    :param: ascending  Sorting ascending value
+    - parameter sortingKey: Sorting key
+    - parameter ascending:  Sorting ascending value
     
-    :returns: SugarRecord finder with the predicate set
+    - returns: SugarRecord finder with the predicate set
     */
     public class func sorted<T: StringLiteralConvertible>(by sortingKey: T, ascending: Bool) -> SugarRecordFinder
     {
@@ -120,9 +120,9 @@ extension RLMObject
     /**
     Returns a SugarRecord finder with the sort descriptor set
     
-    :param: sortDescriptor NSSortDescriptor to be set to the SugarRecord finder
+    - parameter sortDescriptor: NSSortDescriptor to be set to the SugarRecord finder
     
-    :returns: SugarRecord finder with the predicate set
+    - returns: SugarRecord finder with the predicate set
     */
     public class func sorted(by sortDescriptor: NSSortDescriptor) -> SugarRecordFinder
     {
@@ -136,9 +136,9 @@ extension RLMObject
     /**
     Returns a SugarRecord finder with the sort descriptor set
     
-    :param: sortDescriptors Array with NSSortDescriptors
+    - parameter sortDescriptors: Array with NSSortDescriptors
     
-    :returns: SugarRecord finder with the predicate set
+    - returns: SugarRecord finder with the predicate set
     */
     public class func sorted(by sortDescriptors: [NSSortDescriptor]) -> SugarRecordFinder
     {
@@ -155,7 +155,7 @@ extension RLMObject
     /**
     Returns a SugarRecord finder with .all elements enabled
     
-    :returns: SugarRecord finder
+    - returns: SugarRecord finder
     */
     public class func all() -> SugarRecordFinder
     {
@@ -172,7 +172,7 @@ extension RLMObject
     /**
     Returns the count of all existing element
     
-    :returns: Int with the count
+    - returns: Int with the count
     */
     public class func count() -> Int
     {
@@ -197,7 +197,7 @@ extension RLMObject
     /**
     Creates a new object without inserting it in the context
     
-    :returns: Created database object
+    - returns: Created database object
     */
     public class func create() -> AnyObject
     {
@@ -213,9 +213,9 @@ extension RLMObject
     /**
     Create a new object without inserting it in the passed context
     
-    :param: context Context where the object is going to be created
+    - parameter context: Context where the object is going to be created
     
-    :returns: Created database object
+    - returns: Created database object
     */
     public class func create(inContext context: SugarRecordContext) -> AnyObject
     {
@@ -229,7 +229,7 @@ extension RLMObject
     /**
     Saves the object in the object context
     
-    :returns: Bool indicating if the object has been properly saved
+    - returns: Bool indicating if the object has been properly saved
     */
     public func save () -> Bool
     {
@@ -245,8 +245,8 @@ extension RLMObject
     /**
     Saves the object in the context asynchronously (or not) passing a completion closure
     
-    :param: asynchronously Bool indicating if the saving process is asynchronous or not
-    :param: completion     Closure called when the saving operation has been completed
+    - parameter asynchronously: Bool indicating if the saving process is asynchronous or not
+    - parameter completion:     Closure called when the saving operation has been completed
     */
     public func save (asynchronously: Bool, completion: CompletionClosure)
     {
@@ -275,7 +275,7 @@ extension RLMObject
     /**
     Needed to be called when the object is going to be edited
     
-    :returns: returns the current object
+    - returns: returns the current object
     */
     public func beginWriting() -> RLMObject
     {

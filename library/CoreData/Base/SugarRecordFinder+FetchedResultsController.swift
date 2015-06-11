@@ -16,9 +16,9 @@ extension SugarRecordFinder
     /**
     Returns a NSFetchedResultsController with the Finder criteria
     
-    :param: section Section sorting key name
+    - parameter section: Section sorting key name
     
-    :returns: Created NSFetchedResultsController
+    - returns: Created NSFetchedResultsController
     */
     public func fetchedResultsController(section: String?) -> NSFetchedResultsController
     {
@@ -28,10 +28,10 @@ extension SugarRecordFinder
     /**
     Returns a NSFetchedResultsController with the Finder criteria passing the cache name too
     
-    :param: section   Section sortking key name
-    :param: cacheName Cache name
+    - parameter section:   Section sortking key name
+    - parameter cacheName: Cache name
     
-    :returns: Created NSFetchedResultsController
+    - returns: Created NSFetchedResultsController
     */
     public func fetchedResultsController(section: String?, cacheName: String?) -> NSFetchedResultsController
     {
