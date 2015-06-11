@@ -109,7 +109,7 @@ public class iCloudCDStack: DefaultCDStack
     */
     convenience public init(databasePath: String, icloudData: iCloudData, completion: ()->())
     {
-        self.init(databaseURL: NSURL(fileURLWithPath: databasePath)!, icloudData: icloudData, completion: completion)
+        self.init(databaseURL: NSURL.fileURLWithPath(databasePath), icloudData: icloudData, completion: completion)
     }
     
     /**
@@ -153,7 +153,7 @@ public class iCloudCDStack: DefaultCDStack
     */
     convenience public init(databasePath: String, model: NSManagedObjectModel, icloudData: iCloudData, completion: ()->())
     {
-        self.init(databaseURL: NSURL(fileURLWithPath: databasePath)!, model: model, automigrating: true, icloudData: icloudData, completion: completion)
+        self.init(databaseURL: NSURL.fileURLWithPath(databasePath), model: model, automigrating: true, icloudData: icloudData, completion: completion)
     }
     
     /**
@@ -244,7 +244,7 @@ public class iCloudCDStack: DefaultCDStack
             
             // Checking that the PSC exists before adding the store
             if self!.persistentStoreCoordinator == nil {
-                SugarRecord.handle(NSError())
+                SugarRecord.handle(NSError(domain: "The persistent store coordinator is not initialized", code: SugarRecordErrorCodes.CoreDataError.rawValue, userInfo: nil))
             }
             
             // Logging some data
@@ -261,8 +261,8 @@ public class iCloudCDStack: DefaultCDStack
             *  If iCloud if accesible keep creating the PSC
             */
             if iCloudRootPath != nil {
-                let iCloudLogsPath: NSURL = NSURL(fileURLWithPath: iCloudRootPath!.path!.stringByAppendingPathComponent(self!.icloudData!.iCloudLogsDirectory))!
-                let iCloudDataPath: NSURL = NSURL(fileURLWithPath: iCloudRootPath!.path!.stringByAppendingPathComponent(self!.icloudData!.iCloudDataDirectoryName))!
+                let iCloudLogsPath: NSURL = NSURL.fileURLWithPath(iCloudRootPath!.path!.stringByAppendingPathComponent(self!.icloudData!.iCloudLogsDirectory))
+                let iCloudDataPath: NSURL = NSURL.fileURLWithPath(iCloudRootPath!.path!.stringByAppendingPathComponent(self!.icloudData!.iCloudDataDirectoryName))
 
                 // Creating data path in case of doesn't existing
                 var error: NSError?

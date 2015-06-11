@@ -71,7 +71,7 @@ public class DefaultCDStack: SugarRecordStackProtocol
     */
     convenience public init(databasePath: String, automigrating: Bool)
     {
-        self.init(databaseURL: NSURL(fileURLWithPath: databasePath)!, automigrating: automigrating)
+        self.init(databaseURL: NSURL.fileURLWithPath(databasePath), automigrating: automigrating)
     }
     
     /**
@@ -112,7 +112,7 @@ public class DefaultCDStack: SugarRecordStackProtocol
     */
     convenience public init(databasePath: String, model: NSManagedObjectModel, automigrating: Bool)
     {
-        self.init(databaseURL: NSURL(fileURLWithPath: databasePath)!, model: model, automigrating: automigrating)
+        self.init(databaseURL: NSURL.fileURLWithPath(databasePath), model: model, automigrating: automigrating)
     }
 
     /**
@@ -488,9 +488,9 @@ public class DefaultCDStack: SugarRecordStackProtocol
     
     - returns: NSURL with the path
     */
-    internal class func databasePathURLFromName(name: String) -> NSURL!
+    internal class func databasePathURLFromName(name: String) -> NSURL
     {
-        let documentsPath: String = NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, .UserDomainMask, true)[0] as! String
+        let documentsPath: String = NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, .UserDomainMask, true)[0]
         let mainBundleInfo: [NSObject: AnyObject] = NSBundle.mainBundle().infoDictionary!
         let applicationPath: String = documentsPath.stringByAppendingPathComponent("store")
         
@@ -498,11 +498,12 @@ public class DefaultCDStack: SugarRecordStackProtocol
         for path in paths {
             let databasePath: String = path.stringByAppendingPathComponent(name)
             if NSFileManager.defaultManager().fileExistsAtPath(databasePath) {
-                return NSURL(fileURLWithPath: databasePath)!
+                return NSURL.fileURLWithPath(databasePath)
             }
         }
         let databasePath: String = applicationPath.stringByAppendingPathComponent(name)
-        return NSURL(fileURLWithPath: databasePath)!
+        return NSURL.fileURLWithPath(databasePath)
+        
     }
     
     
@@ -526,7 +527,7 @@ public class DefaultCDStack: SugarRecordStackProtocol
             var error: NSError?
             do {
                 try context.save()
-            } catch var error1 as NSError {
+            } catch let error1 as NSError {
                 error = error1
             } catch {
                 fatalError()
@@ -591,9 +592,9 @@ public extension NSManagedObjectContext
         var error: NSError?
         let saved: Bool
         do {
-            try context.obtainPermanentIDsForObjects(insertedObjects.allObjects)
+            try context.obtainPermanentIDsForObjects(insertedObjects.allObjects as! [NSManagedObject])
             saved = true
-        } catch var error1 as NSError {
+        } catch let error1 as NSError {
             error = error1
             saved = false
         }
