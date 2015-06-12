@@ -190,7 +190,7 @@ public class DefaultCDStack: SugarRecordStackProtocol
         if self.rootSavingContext == nil {
             return nil
         }
-        var context: NSManagedObjectContext = NSManagedObjectContext(concurrencyType: .ConfinementConcurrencyType)
+        let context: NSManagedObjectContext = NSManagedObjectContext(concurrencyType: .ConfinementConcurrencyType)
         context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         context.parentContext = self.rootSavingContext!
         if self.mainContext != nil {
@@ -226,7 +226,7 @@ public class DefaultCDStack: SugarRecordStackProtocol
         if NSFileManager.defaultManager().fileExistsAtPath(databasePath!.path!) {
             do {
                 try NSFileManager.defaultManager().removeItemAtURL(databasePath!)
-            } catch var error1 as NSError {
+            } catch let error1 as NSError {
                 error = error1
             }
             SugarRecord.handle(error)
@@ -335,7 +335,7 @@ public class DefaultCDStack: SugarRecordStackProtocol
     */
     internal func createPersistentStoreCoordinator() -> NSPersistentStoreCoordinator
     {
-        var coordinator: NSPersistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel!)
+        let coordinator: NSPersistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel!)
         return coordinator
     }
     
@@ -360,7 +360,7 @@ public class DefaultCDStack: SugarRecordStackProtocol
         if self.automigrating {
             do {
                 store = try self.persistentStoreCoordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: self.databasePath!, options: DefaultCDStack.autoMigrateStoreOptions())
-            } catch var error1 as NSError {
+            } catch let error1 as NSError {
                 error = error1
                 store = nil
             }
@@ -368,7 +368,7 @@ public class DefaultCDStack: SugarRecordStackProtocol
         else {
             do {
                 store = try self.persistentStoreCoordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: self.databasePath!, options: DefaultCDStack.defaultStoreOptions())
-            } catch var error1 as NSError {
+            } catch let error1 as NSError {
                 error = error1
                 store = nil
             }
@@ -384,17 +384,17 @@ public class DefaultCDStack: SugarRecordStackProtocol
             let walSidecar: NSURL = NSURL(string: rawURL.stringByAppendingString("-wal"))!
             do {
                 try NSFileManager.defaultManager().removeItemAtURL(self.databasePath!)
-            } catch var error as NSError {
+            } catch let error as NSError {
                 deleteError = error
             }
             do {
                 try NSFileManager.defaultManager().removeItemAtURL(shmSidecar)
-            } catch var error1 as NSError {
+            } catch let error1 as NSError {
                 error = error1
             }
             do {
                 try NSFileManager.defaultManager().removeItemAtURL(walSidecar)
-            } catch var error1 as NSError {
+            } catch let error1 as NSError {
                 error = error1
             }
             SugarRecordLogger.logLevelWarn.log("Incompatible model version has been removed \(self.databasePath!.lastPathComponent)")
@@ -408,7 +408,7 @@ public class DefaultCDStack: SugarRecordStackProtocol
             self.persistentStoreCoordinator!.lock()
             do {
                 store = try self.persistentStoreCoordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: self.databasePath, options: DefaultCDStack.defaultStoreOptions())
-            } catch var error1 as NSError {
+            } catch let error1 as NSError {
                 error = error1
                 store = nil
             }
@@ -440,7 +440,7 @@ public class DefaultCDStack: SugarRecordStackProtocol
         do {
             try fileManager.createDirectoryAtPath(path.path!, withIntermediateDirectories: true, attributes: nil)
             pathWasCreated = true
-        } catch var error1 as NSError {
+        } catch let error1 as NSError {
             error = error1
             pathWasCreated = false
         }
@@ -491,7 +491,6 @@ public class DefaultCDStack: SugarRecordStackProtocol
     internal class func databasePathURLFromName(name: String) -> NSURL
     {
         let documentsPath: String = NSSearchPathForDirectoriesInDomains(.ApplicationSupportDirectory, .UserDomainMask, true)[0]
-        let mainBundleInfo: [NSObject: AnyObject] = NSBundle.mainBundle().infoDictionary!
         let applicationPath: String = documentsPath.stringByAppendingPathComponent("store")
         
         let paths: [String] = [documentsPath, applicationPath]

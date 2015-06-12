@@ -57,7 +57,7 @@ extension NSManagedObject
     */
     public class func by(predicate: NSPredicate) -> SugarRecordFinder
     {
-        var finder: SugarRecordFinder = SugarRecordFinder(predicate: predicate)
+        let finder: SugarRecordFinder = SugarRecordFinder(predicate: predicate)
         finder.objectClass = self
         finder.stackType = stackType()
         return finder
@@ -72,8 +72,8 @@ extension NSManagedObject
     */
     public class func by(predicateString: NSString) -> SugarRecordFinder
     {
-        var finder: SugarRecordFinder = SugarRecordFinder()
-        finder.setPredicate(predicateString as! String)
+        let finder: SugarRecordFinder = SugarRecordFinder()
+        finder.setPredicate(predicateString as String)
         finder.objectClass = self
         finder.stackType = stackType()
         return finder
@@ -89,7 +89,7 @@ extension NSManagedObject
     */
     public class func by<T: StringLiteralConvertible, R: StringLiteralConvertible>(key: T, equalTo value: R) -> SugarRecordFinder
     {
-        var finder: SugarRecordFinder = SugarRecordFinder()
+        let finder: SugarRecordFinder = SugarRecordFinder()
         finder.setPredicate(byKey: "\(key)", andValue: "\(value)")
         finder.objectClass = self
         finder.stackType = stackType()
@@ -109,7 +109,7 @@ extension NSManagedObject
     */
     public class func sorted<T: StringLiteralConvertible>(by sortingKey: T, ascending: Bool) -> SugarRecordFinder
     {
-        var finder: SugarRecordFinder = SugarRecordFinder()
+        let finder: SugarRecordFinder = SugarRecordFinder()
         finder.addSortDescriptor(byKey: "\(sortingKey)", ascending: ascending)
         finder.objectClass = self
         finder.stackType = stackType()
@@ -125,7 +125,7 @@ extension NSManagedObject
     */
     public class func sorted(by sortDescriptor: NSSortDescriptor) -> SugarRecordFinder
     {
-        var finder: SugarRecordFinder = SugarRecordFinder()
+        let finder: SugarRecordFinder = SugarRecordFinder()
         finder.addSortDescriptor(sortDescriptor)
         finder.objectClass = self
         finder.stackType = stackType()
@@ -141,7 +141,7 @@ extension NSManagedObject
     */
     public class func sorted(by sortDescriptors: [NSSortDescriptor]) -> SugarRecordFinder
     {
-        var finder: SugarRecordFinder = SugarRecordFinder()
+        let finder: SugarRecordFinder = SugarRecordFinder()
         finder.setSortDescriptors(sortDescriptors)
         finder.objectClass = self
         finder.stackType = stackType()
@@ -158,7 +158,7 @@ extension NSManagedObject
     */
     public class func all() -> SugarRecordFinder
     {
-        var finder: SugarRecordFinder = SugarRecordFinder()
+        let finder: SugarRecordFinder = SugarRecordFinder()
         finder.all()
         finder.objectClass = self
         finder.stackType = stackType()

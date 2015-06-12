@@ -120,7 +120,7 @@ public class DefaultREALMStack: SugarRecordStackProtocol
         var error: NSError?
         do {
             try NSFileManager.defaultManager().removeItemAtPath(databaseName)
-        } catch var error1 as NSError {
+        } catch let error1 as NSError {
             error = error1
         }
         if error != nil {
@@ -158,7 +158,7 @@ public class DefaultREALMStack: SugarRecordStackProtocol
     */
     internal class func sorteredAndFiltered(migrations migrations: [RLMObjectMigration<RLMObject>], fromOldSchema oldSchema: Int) -> [RLMObjectMigration<RLMObject>]
     {
-        var filteredMigrations: [RLMObjectMigration<RLMObject>] = migrations.filter({ (migration: RLMObjectMigration<RLMObject>) -> Bool in return migration.toSchema > Int(oldSchema)})
+        let filteredMigrations: [RLMObjectMigration<RLMObject>] = migrations.filter({ (migration: RLMObjectMigration<RLMObject>) -> Bool in return migration.toSchema > Int(oldSchema)})
         return sorted(migrations: filteredMigrations)
     }
     

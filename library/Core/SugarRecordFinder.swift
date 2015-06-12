@@ -108,7 +108,7 @@ public class SugarRecordFinder
         if self.predicate != nil {
             SugarRecordLogger.logLevelWarn.log("You are overriding an existing predicate")
         }
-        self.setPredicate(predicateString as! String)
+        self.setPredicate(predicateString as String)
         return self
     }
     

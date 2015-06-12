@@ -42,7 +42,7 @@ public class SugarRecordCDContext: SugarRecordContext
         var error: NSError?
         do {
             try self.contextCD.save()
-        } catch var error1 as NSError {
+        } catch let error1 as NSError {
             error = error1
         }
         if error != nil {
@@ -69,7 +69,7 @@ public class SugarRecordCDContext: SugarRecordContext
     public func createObject(objectClass: AnyClass) -> AnyObject?
     {
         let managedObjectClass: NSManagedObject.Type = objectClass as! NSManagedObject.Type
-        var object: AnyObject = NSEntityDescription.insertNewObjectForEntityForName(managedObjectClass.modelName(), inManagedObjectContext: self.contextCD)
+        let object: AnyObject = NSEntityDescription.insertNewObjectForEntityForName(managedObjectClass.modelName(), inManagedObjectContext: self.contextCD)
         return object
     }
     
@@ -93,7 +93,6 @@ public class SugarRecordCDContext: SugarRecordContext
     public func find(finder: SugarRecordFinder) -> SugarRecordResults
     {
         let fetchRequest: NSFetchRequest = SugarRecordCDContext.fetchRequest(fromFinder: finder)
-        var error: NSError?
         var objects: [NSManagedObject]? = nil
         do {
             try objects = self.contextCD.executeFetchRequest(fetchRequest) as? [NSManagedObject]
@@ -172,8 +171,6 @@ public class SugarRecordCDContext: SugarRecordContext
     */
     public func deleteObjects(objects: SugarRecordResults) -> ()
     {
-        var objectsDeleted: Int = 0
-        
         for (var index = 0; index < Int(objects.count) ; index++) {
             let object: AnyObject! = objects[index]
             if (object != nil) {
@@ -192,7 +189,7 @@ public class SugarRecordCDContext: SugarRecordContext
         let fetchRequest: NSFetchRequest = NSFetchRequest(entityName: managedObjectClass.modelName())
         fetchRequest.predicate = predicate
         var error: NSError?
-        var count = self.contextCD.countForFetchRequest(fetchRequest, error: &error)
+        let count = self.contextCD.countForFetchRequest(fetchRequest, error: &error)
         SugarRecordLogger.logLevelInfo.log("Found \(count) objects in database")
         return count
     }
@@ -213,7 +210,7 @@ public class SugarRecordCDContext: SugarRecordContext
         let objectInContext: NSManagedObject?
         do {
             objectInContext = try context.existingObjectWithID(object.objectID)
-        } catch var error1 as NSError {
+        } catch let error1 as NSError {
             error = error1
             objectInContext = nil
         }
